@@ -4,6 +4,7 @@ import { UpdatePostDto } from './dto/update-post.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Posts } from './entities/post.entity';
 import { Repository } from 'typeorm';
+import { User } from '../users/entities/user.entity';
 
 @Injectable()
 export class PostsService {
@@ -11,7 +12,7 @@ export class PostsService {
     @InjectRepository(Posts) private readonly postsRepo: Repository<Posts>,
   ) {}
 
-  create(createPostDto: CreatePostDto) {
+  create(createPostDto: CreatePostDto, author: User) {
     return this.postsRepo.save(createPostDto)
   }
 
